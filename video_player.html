@@ -17,11 +17,11 @@
         #video-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 100%;
         }
         iframe {
             width: 100%;
-            height: 315px;
+            height: 100vh;
         }
         #controls {
             position: absolute;
@@ -34,6 +34,7 @@
             max-width: 600px;
             pointer-events: none;
             display: none; /* Hide controls initially */
+            z-index: 2;
         }
         button {
             padding: 10px 20px;
@@ -107,6 +108,7 @@
 
             function onPlayerReady(event) {
                 event.target.playVideo();
+                requestFullScreen();
             }
 
             function onPlayerStateChange(event) {
@@ -150,6 +152,19 @@
                 if (videoSources[direction]) {
                     player.loadVideoById(videoSources[direction]);
                     controlsElement.style.display = 'none';  // Hide controls initially for new video
+                }
+            }
+
+            function requestFullScreen() {
+                var element = document.getElementById("video-container");
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
+                } else if (element.mozRequestFullScreen) { // Firefox
+                    element.mozRequestFullScreen();
+                } else if (element.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    element.webkitRequestFullscreen();
+                } else if (element.msRequestFullscreen) { // IE/Edge
+                    element.msRequestFullscreen();
                 }
             }
         });
