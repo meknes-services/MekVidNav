@@ -19,9 +19,9 @@
             width: 100%;
             max-width: 600px;
         }
-        video {
+        iframe {
             width: 100%;
-            height: auto;
+            height: 315px;
         }
         #controls {
             position: absolute;
@@ -33,6 +33,7 @@
             width: 100%;
             max-width: 600px;
             pointer-events: none;
+            display: none; /* Hide controls initially */
         }
         button {
             padding: 10px 20px;
@@ -54,10 +55,7 @@
 </head>
 <body>
     <div id="video-container">
-        <video id="main-video" controls>
-            <source src="" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <div id="main-video"></div>
         <div id="controls">
             <button id="left">Left</button>
             <button id="forward">Forward</button>
@@ -66,35 +64,93 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const videoElement = document.getElementById('main-video');
-            const urlParams = new URLSearchParams(window.location.search);
-            const videoSrc = urlParams.get('video');
-            if (videoSrc) {
-                videoElement.src = decodeURIComponent(videoSrc);
-                videoElement.play();
-            }
+            const controlsElement = document.getElementById('controls');
+            const leftButton = document.getElementById('left');
+            const forwardButton = document.getElementById('forward');
+            const rightButton = document.getElementById('right');
 
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoSrc = decodeURIComponent(urlParams.get('video'));
+
+            // Define video sources
             const videoSources = {
-                left: 'path/to/left/video.mp4',
-                forward: 'path/to/forward/video.mp4',
-                right: 'path/to/right/video.mp4'
+                left: 'gyluI5qMTuk',      // Replace with actual YouTube video ID
+                forward: 'c2yqlpbuoKM',   // Replace with actual YouTube video ID
+                right: 'VYOjWnS4cMY'      // Replace with actual YouTube video ID
             };
 
-            document.getElementById('left').addEventListener('click', () => {
+            // Load the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // Replace the 'main-video' with an <iframe> and YouTube player after the API code downloads.
+            var player;
+            window.onYouTubeIframeAPIReady = function() {
+                player = new YT.Player('main-video', {
+                    height: '315',
+                    width: '560',
+                    videoId: videoSrc,
+                    playerVars: {
+                        'rel': 0,
+                        'modestbranding': 1,
+                        'showinfo': 0,
+                        'controls': 1
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+
+            function onPlayerReady(event) {
+                event.target.playVideo();
+            }
+
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.PLAYING) {
+                    checkVideoTime(player);
+                }
+            }
+
+            function checkVideoTime(player) {
+                const interval = setInterval(() => {
+                    const currentTime = player.getCurrentTime();
+                    const duration = player.getDuration();
+                    if (duration > 0 && (duration - currentTime) < 10) {
+                        controlsElement.style.display = 'flex';
+                        checkAndDisplayControls();
+                        clearInterval(interval); // Stop checking once controls are displayed
+                    }
+                }, 1000);
+            }
+
+            // Function to check and display control buttons
+            function checkAndDisplayControls() {
+                if (videoSources.left) leftButton.style.display = 'inline-block';
+                if (videoSources.forward) forwardButton.style.display = 'inline-block';
+                if (videoSources.right) rightButton.style.display = 'inline-block';
+            }
+
+            leftButton.addEventListener('click', () => {
                 changeVideo('left');
             });
 
-            document.getElementById('forward').addEventListener('click', () => {
+            forwardButton.addEventListener('click', () => {
                 changeVideo('forward');
             });
 
-            document.getElementById('right').addEventListener('click', () => {
+            rightButton.addEventListener('click', () => {
                 changeVideo('right');
             });
 
             function changeVideo(direction) {
-                videoElement.src = videoSources[direction];
-                videoElement.play();
+                if (videoSources[direction]) {
+                    player.loadVideoById(videoSources[direction]);
+                    controlsElement.style.display = 'none';  // Hide controls initially for new video
+                }
             }
         });
     </script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" >
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +48,6 @@
             margin-bottom: 2px;
         }
     </style>
-    <script src="app.js"></script>
 </head>
 <body>
     <h1>التجوال في مكناس</h1>
@@ -57,11 +56,11 @@
     <div class="category">
         <h2>محطات القطار</h2>
         <div class="buttons-container">
-            <div class="button" onclick="navigateToVideo('assets/train_station/train_station_small/train_station_small_video.mp4')">
+            <div class="button" onclick="navigateToVideo('h_k2rkLmHl0')">
                 <img src="assets/train_station/train_station_small/train_station_small.jpg" alt="المحطة الصغرى">
                 <p>المحطة الصغرى</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/train_station/train_station_large/train_station_large_video.mp4')">
+            <div class="button" onclick="navigateToVideo('XfuzLZ2AfgE')">
                 <img src="assets/train_station/train_station_large/train_station_large.jpg" alt="المحطة الكبرى">
                 <p>المحطة الكبرى</p>
             </div>
@@ -71,15 +70,15 @@
     <div class="category">
         <h2>محطات السيارات</h2>
         <div class="buttons-container">
-            <div class="button" onclick="navigateToVideo('assets/car-stations/car_station_azrou/car_station_azrou_video.mp4')">
+            <div class="button" onclick="navigateToVideo('A1B2C3D4E5')">
                 <img src="assets/car-stations/car_station_azrou/car-stations-01.jpg" alt="المحطة azrou">
                 <p>محطة azrou</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/car-stations/car_station_2/car_station_2_video.mp4')">
+            <div class="button" onclick="navigateToVideo('F6G7H8I9J0')">
                 <img src="assets/car-stations/car_station_02/car-stations-02.jpg" alt="المحطة 2">
                 <p>محطة الكيران</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/car-stations/car_station_3/car_station_3_video.mp4')">
+            <div class="button" onclick="navigateToVideo('K1L2M3N4O5')">
                 <img src="https://lh5.googleusercontent.com/p/AF1QipNdOodn-3KcdP1h6CCglfX14XROoe8BgoemijXI=w203-h450-k-no" alt="المحطة 3">
                 <p>محطة مولاي دريس</p>
             </div>
@@ -89,15 +88,15 @@
     <div class="category">
         <h2>المعالم</h2>
         <div class="buttons-container">
-            <div class="button" onclick="navigateToVideo('assets/landmarks/bab_mansour/bab_mansour_video.mp4')">
+            <div class="button" onclick="navigateToVideo('P1Q2R3S4T5')">
                 <img src="assets/landmarks/bab_mansour/bab_mansour.jpg" alt="باب منصور">
                 <p>باب منصور</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/landmarks/sahrij_souani/sahrij_souani_video.mp4')">
+            <div class="button" onclick="navigateToVideo('U6V7W8X9Y0')">
                 <img src="assets/landmarks/sahrij_souani/sahrij_souani.jpg" alt="سهرج السواني">
                 <p>سهرج السواني</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/landmarks/city_center/city_center_video.mp4')">
+            <div class="button" onclick="navigateToVideo('Z1A2B3C4D5')">
                 <img src="assets/landmarks/city_center/city_center.jpg" alt="وسط المدينة">
                 <p>وسط المدينة</p>
             </div>
@@ -107,19 +106,19 @@
     <div class="category">
         <h2>المداخل الرئيسية للمدينة</h2>
         <div class="buttons-container">
-            <div class="button" onclick="navigateToVideo('assets/main-entrances/rabat-road/rabat_road_video.mp4')">
+            <div class="button" onclick="navigateToVideo('E6F7G8H9I0')">
                 <img src="assets/main-entrances/rabat_road/rabat_road.jpg" alt="طريق الرباط">
                 <p>طريق الرباط</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/main-entrances/azrou_road/azrou_road_video.mp4')">
+            <div class="button" onclick="navigateToVideo('J1K2L3M4N5')">
                 <img src="assets/main-entrances/azrou_road/azrou_road.jpg" alt="طريق أزرو">
                 <p>طريق أزرو</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/main-entrances/fes_road/fes_road_video.mp4')">
+            <div class="button" onclick="navigateToVideo('O6P7Q8R9S0')">
                 <img src="assets/main-entrances/fes_road/fes_road.jpg" alt="طريق فاس">
                 <p>طريق فاس</p>
             </div>
-            <div class="button" onclick="navigateToVideo('assets/main-entrances/gharab_road/sidi-kacem/sidi-kacem_road_video.mp4')">
+            <div class="button" onclick="navigateToVideo('T1U2V3W4X5')">
                 <img src="assets/main-entrances/gharab_road/sidi-kacem/sidi-kacem.jpg" alt="طريق الغرب">
                 <p>طريق الغرب</p>
             </div>
@@ -127,8 +126,8 @@
     </div>
 
     <script>
-        function navigateToVideo(videoPath) {
-            window.location.href = `video_player.html?video=${encodeURIComponent(videoPath)}`;
+        function navigateToVideo(videoId) {
+            window.location.href = `video_player.html?video=${encodeURIComponent(videoId)}`;
         }
     </script>
 </body>
